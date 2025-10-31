@@ -1,6 +1,20 @@
 import { ImageAnnotatorClient } from '@google-cloud/vision';
 
-const client = new ImageAnnotatorClient();
+// Method 1: Using service account key file (recommended for development)
+const client = new ImageAnnotatorClient({
+    keyFilename: './service-account-key.json',
+    projectId: 'silver-ripple-476718-q0'
+});
+
+// Alternative Method 2: Using environment variable GOOGLE_APPLICATION_CREDENTIALS
+// Set: export GOOGLE_APPLICATION_CREDENTIALS="./service-account-key.json"
+// const client = new ImageAnnotatorClient({
+//     projectId: 'silver-ripple-476718-q0'
+// });
+
+// Alternative Method 3: Using Application Default Credentials (for production)
+// Run: gcloud auth application-default login
+// const client = new ImageAnnotatorClient();
 
 function detectFace(fileName: string) {
     console.log(`Running logo detection on ${fileName}`);
